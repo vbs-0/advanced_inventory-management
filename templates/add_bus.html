@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    input[type="date"]::-webkit-calendar-picker-indicator{
+        background-color: white;
+        border-radius: 7px;
+    }
+</style>
+<div>
+    <h2>Add New Bus</h2>
+    <div class="bg-gray-900 rounded-lg p-6">
+        <form action="{{ url_for('add_bus') }}" method="POST">
+            <div>
+                <label for="bus_number" class="block text-sm font-medium text-cyan-400 mb-2">Bus Number:</label>
+                <input type="text" class="w-full p-3 bg-gray-800 text-cyan-300 border border-cyan-600 rounded-lg focus:ring-2 focus:ring-cyan-500" name="bus_number" required>
+            </div>
+            <div>  
+                <label for="bus_number_plate" class="block text-sm font-medium text-cyan-400 mb-2">Bus Number Plate:</label>
+                <input type="text" class="w-full p-3 bg-gray-800 text-cyan-300 border border-cyan-600 rounded-lg focus:ring-2 focus:ring-cyan-500" name="bus_number_plate" required>
+            </div>
+            <div>
+                <label for="manufacturer" class="block text-sm font-medium text-cyan-400 mb-2">Manufacturer:</label>
+                <input type="text" class="w-full p-3 bg-gray-800 text-cyan-300 border border-cyan-600 rounded-lg focus:ring-2 focus:ring-cyan-500" name="manufacturer" required>
+            </div>
+            <div>  
+                <label for="manufacturer_date" class="block text-sm font-medium text-cyan-400 mb-2">Manufacturer Date:</label>
+                <input class="w- p-medium bg-gray-800 text-cyan-300 border border-white rounded-lg focus:ring-2 focus:ring-white-500" type="date" name="manufacturer_date" required>
+            </div>
+            <div>
+                <label for="bought_date" class="block text-sm font-medium text-cyan-400 mb-2">Bought Date:</label>
+                <input class="w- p-medium bg-gray-800 text-white border border-white rounded-lg focus:ring-2 focus:ring-white-500" style="color: white;" type="date" name="bought_date" required>
+            </div>
+            <div style="margin-top: 8px;">  
+                <a href="{{ url_for('buses') }}" class="w- p-medium bg-gray-800 text-cyan-300 border border-white rounded-lg focus:ring-2 focus:ring-white-500">Cancel</a>
+                <button style="margin-left: 5px;" type="submit" class="w- p-medium bg-gray-800 text-cyan-300 border border-white rounded-lg focus:ring-2 focus:ring-white-500">Add Bus</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
