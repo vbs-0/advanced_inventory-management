@@ -12,7 +12,7 @@
     <div class="flex flex-col sm:flex-row justify-between mb-4 space-y-2 sm:space-y-0 sm:space-x-4">
         <input type="text" id="search" placeholder="Search..." class="border rounded px-2 py-1 text-indigo-300 bg-[#1e1b4b] w-full sm:w-64" oninput="filterTable()">
         <select id="sortOptions" onchange="sortTable()" class="border rounded px-2 py-1 bg-[#1e1b4b] text-indigo-300 w-full sm:w-auto">
-            <option value="id">Sort by Bus ID</option>
+            <option value="id">Sort by S.No</option>
             <option value="name">Sort by Bus Name</option>
             <option value="number">Sort by Bus Number</option>
             <option value="manufacturer">Sort by Manufacturer</option>
@@ -56,7 +56,7 @@
         <table class="min-w-full divide-y divide-indigo-600">
             <thead>
                 <tr class="bg-indigo-900/50">
-                    <th class="py-3 px-4 text-left text-xs font-medium text-indigo-300 uppercase tracking-wider">Bus ID</th>
+                    <th class="py-3 px-4 text-left text-xs font-medium text-indigo-300 uppercase tracking-wider">S.No</th>
                     <th class="py-3 px-4 text-left text-xs font-medium text-indigo-300 uppercase tracking-wider">Bus Name</th>
                     <th class="py-3 px-4 text-left text-xs font-medium text-indigo-300 uppercase tracking-wider">Bus Number</th>
                     <th class="py-3 px-4 text-left text-xs font-medium text-indigo-300 uppercase tracking-wider">Number Plate</th>
@@ -70,7 +70,7 @@
             <tbody class="divide-y divide-indigo-600" id="buses-table-body">
                 {% for bus in buses %}
                 <tr class="hover:bg-indigo-900/30 transition-colors duration-150">
-                    <td class="py-2 px-4 text-indigo-300">{{ bus.id }}</td>
+                    <td class="py-2 px-4 text-indigo-300">{{ loop.index }}</td>
                     <td class="py-2 px-4 text-indigo-300">{{ bus.bus_number_plate }}({{ bus.bus_number }})</td>
                     <td class="py-2 px-4 text-indigo-300">{{ bus.bus_number }}</td>
                     <td class="py-2 px-4 text-indigo-300">{{ bus.bus_number_plate }}</td>
@@ -120,7 +120,10 @@
         
         const sortedRows = rows.sort((a, b) => {
             if (sortOption === 'id') {
-                return parseInt(a.cells[0].textContent) - parseInt(b.cells[0].textContent);
+                // Sort by serial number
+                const aIndex = parseInt(a.cells[0].textContent);
+                const bIndex = parseInt(b.cells[0].textContent);
+                return aIndex - bIndex;
             }
             if (sortOption === 'name') {
                 // Sort by registration number (before parentheses)
