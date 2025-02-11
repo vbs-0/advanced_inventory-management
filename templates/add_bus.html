@@ -1,41 +1,79 @@
 {% extends "base.html" %}
 
 {% block content %}
-<style>
-    input[type="date"]::-webkit-calendar-picker-indicator{
-        background-color: white;
-        border-radius: 7px;
-    }
-</style>
-<div>
-    <h2>Add New Bus</h2>
+<div class="max-w-4xl mx-auto py-6 px-4">
+    <h1 class="text-3xl font-bold text-cyan-400 mb-8">Add New Bus</h1>
     <div class="bg-gray-900 rounded-lg p-6">
-        <form action="{{ url_for('add_bus') }}" method="POST">
+        <form action="{{ url_for('add_bus') }}" method="POST" class="space-y-6">
+            <!-- Bus Number -->
             <div>
-                <label for="bus_number" class="block text-sm font-medium text-cyan-400 mb-2">Bus Number:</label>
-                <input type="text" class="w-full p-3 bg-gray-800 text-cyan-300 border border-cyan-600 rounded-lg focus:ring-2 focus:ring-cyan-500" name="bus_number" required>
+                <label for="bus_number" class="block text-sm font-medium text-cyan-400 mb-2">Bus Number</label>
+                <input type="text" 
+                       id="bus_number"
+                       name="bus_number" 
+                       class="w-full p-3 bg-gray-800 text-cyan-300 border border-cyan-600 rounded-lg focus:ring-2 focus:ring-cyan-500" 
+                       required>
             </div>
+            <!-- Bus Number Plate -->
             <div>  
-                <label for="bus_number_plate" class="block text-sm font-medium text-cyan-400 mb-2">Bus Number Plate:</label>
-                <input type="text" class="w-full p-3 bg-gray-800 text-cyan-300 border border-cyan-600 rounded-lg focus:ring-2 focus:ring-cyan-500" name="bus_number_plate" required>
+                <label for="bus_number_plate" class="block text-sm font-medium text-cyan-400 mb-2">Bus Number Plate</label>
+                <input type="text" 
+                       id="bus_number_plate"
+                       name="bus_number_plate" 
+                       class="w-full p-3 bg-gray-800 text-cyan-300 border border-cyan-600 rounded-lg focus:ring-2 focus:ring-cyan-500" 
+                       required>
             </div>
+            <!-- Manufacturer -->
             <div>
-                <label for="manufacturer" class="block text-sm font-medium text-cyan-400 mb-2">Manufacturer:</label>
-                <input type="text" class="w-full p-3 bg-gray-800 text-cyan-300 border border-cyan-600 rounded-lg focus:ring-2 focus:ring-cyan-500" name="manufacturer" required>
+                <label for="manufacturer" class="block text-sm font-medium text-cyan-400 mb-2">Manufacturer</label>
+                <input type="text" 
+                       id="manufacturer"
+                       name="manufacturer" 
+                       class="w-full p-3 bg-gray-800 text-cyan-300 border border-cyan-600 rounded-lg focus:ring-2 focus:ring-cyan-500" 
+                       required>
             </div>
-            <div>  
-                <label for="manufacturer_date" class="block text-sm font-medium text-cyan-400 mb-2">Manufacturer Date:</label>
-                <input class="w- p-medium bg-gray-800 text-cyan-300 border border-white rounded-lg focus:ring-2 focus:ring-white-500" type="date" name="manufacturer_date" required>
+            <!-- Dates Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Manufacturer Date -->
+                <div>  
+                    <label for="manufacturer_date" class="block text-sm font-medium text-cyan-400 mb-2">Manufacturer Date</label>
+                    <input type="date" 
+                           id="manufacturer_date"
+                           name="manufacturer_date" 
+                           class="w-full p-3 bg-gray-800 text-cyan-300 border border-cyan-600 rounded-lg focus:ring-2 focus:ring-cyan-500" 
+                           required>
+                </div>
+                <!-- Bought Date -->
+                <div>
+                    <label for="bought_date" class="block text-sm font-medium text-cyan-400 mb-2">Bought Date</label>
+                    <input type="date" 
+                           id="bought_date"
+                           name="bought_date" 
+                           class="w-full p-3 bg-gray-800 text-cyan-300 border border-cyan-600 rounded-lg focus:ring-2 focus:ring-cyan-500" 
+                           required>
+                </div>
             </div>
-            <div>
-                <label for="bought_date" class="block text-sm font-medium text-cyan-400 mb-2">Bought Date:</label>
-                <input class="w- p-medium bg-gray-800 text-white border border-white rounded-lg focus:ring-2 focus:ring-white-500" style="color: white;" type="date" name="bought_date" required>
-            </div>
-            <div style="margin-top: 8px;">  
-                <a href="{{ url_for('buses') }}" class="w- p-medium bg-gray-800 text-cyan-300 border border-white rounded-lg focus:ring-2 focus:ring-white-500">Cancel</a>
-                <button style="margin-left: 5px;" type="submit" class="w- p-medium bg-gray-800 text-cyan-300 border border-white rounded-lg focus:ring-2 focus:ring-white-500">Add Bus</button>
+            <!-- Buttons -->
+            <div class="flex justify-end space-x-4">
+                <a href="{{ url_for('buses') }}" 
+                   class="px-6 py-3 bg-gray-700 text-white font-semibold rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500">
+                    Cancel
+                </a>
+                <button type="submit" 
+                        class="px-6 py-3 bg-cyan-600 text-white font-semibold rounded-lg hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500">
+                    Add Bus
+                </button>
             </div>
         </form>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Set min/max dates
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('bought_date').max = today;
+    document.getElementById('manufacturer_date').max = today;
+});
+</script>
 {% endblock %}
