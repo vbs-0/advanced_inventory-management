@@ -108,29 +108,41 @@
     </div>
 
     <!-- Create Order Modal -->
-    <div id="createOrderModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
-        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+    <div id="createOrderModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 overflow-y-auto h-full w-full backdrop-blur-sm">
+        <div class="relative top-20 mx-auto p-6 border border-cyan-600/20 w-96 shadow-xl rounded-xl bg-gradient-to-br from-gray-900 to-gray-800">
             <div class="mt-3">
-                <h3 class="text-lg font-medium leading-6 text-gray-900">Create New Order</h3>
-                <input type="text" id="product-search" placeholder="Search Products" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 mb-4">
+                <h3 class="text-lg font-medium leading-6 text-cyan-300 mb-4">Create New Order</h3>
+                <input type="text" 
+                       id="product-search" 
+                       placeholder="Search Products" 
+                       class="block w-full p-2 rounded-lg bg-gray-800 text-cyan-300 border border-cyan-600 mb-4 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500">
                 <form action="{{ url_for('create_order') }}" method="POST" class="mt-4 space-y-4" id="orderForm">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Products</label>
-                        <div id="productCheckboxes" class="mt-1">
+                        <label class="block text-sm font-medium text-cyan-300 mb-2">Products</label>
+                        <div id="productCheckboxes" class="mt-1 space-y-2 max-h-60 overflow-y-auto pr-2">
                             {% for product in products %}
-                            <div class="flex items-center">
-                                <input type="checkbox" id="product_{{ product.id }}" name="product_ids" value="{{ product.id }}" class="mr-2">
-                                <label for="product_{{ product.id }}" class="text-sm">{{ product.name }} (In Stock: {{ product.quantity }})</label>
+                            <div class="flex items-center p-2 rounded-lg hover:bg-gray-700/50 transition-colors">
+                                <input type="checkbox" 
+                                       id="product_{{ product.id }}" 
+                                       name="product_ids" 
+                                       value="{{ product.id }}" 
+                                       class="mr-3 h-4 w-4 rounded border-cyan-600 text-cyan-600 focus:ring-cyan-500">
+                                <label for="product_{{ product.id }}" class="text-sm text-cyan-300">
+                                    {{ product.name }} <span class="text-cyan-500">(In Stock: {{ product.quantity }})</span>
+                                </label>
                             </div>
                             {% endfor %}
                         </div>
                     </div>
-                    <div id="quantityInputs"></div>
-                    <div class="flex justify-end space-x-3">
-                        <button type="button" onclick="document.getElementById('createOrderModal').classList.add('hidden')" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <div id="quantityInputs" class="space-y-3"></div>
+                    <div class="flex justify-end space-x-3 mt-6">
+                        <button type="button" 
+                                onclick="document.getElementById('createOrderModal').classList.add('hidden')" 
+                                class="px-4 py-2 bg-gray-700 text-cyan-300 rounded-lg hover:bg-gray-600 transition-colors duration-200">
                             Cancel
                         </button>
-                        <button type="submit" class="bg-indigo-600 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <button type="submit" 
+                                class="px-4 py-2 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 transition-colors duration-200">
                             Create Order
                         </button>
                     </div>
@@ -150,8 +162,14 @@
                 const productName = checkbox.nextElementSibling.textContent;
                 const input = document.createElement('div');
                 input.innerHTML = `
-                    <label for="quantity_${productId}" class="block text-sm font-medium text-gray-700">${productName} Quantity:</label>
-                    <input type="number" name="quantity_${productId}" id="quantity_${productId}" min="1" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    <label for="quantity_${productId}" class="block text-sm font-medium text-cyan-300 mb-1">${productName} Quantity:</label>
+                    <input type="number" 
+                           name="quantity_${productId}" 
+                           id="quantity_${productId}" 
+                           min="1" 
+                           required 
+                           class="mt-1 block w-full p-2 rounded-lg bg-gray-800 text-cyan-300 border border-cyan-600 focus:ring-2 focus:ring-cyan-500" 
+                           oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                 `;
                 quantityInputsDiv.appendChild(input);
             });
@@ -206,4 +224,3 @@
     </script>
 </div>
 {% endblock %}
-This complete code includes:
