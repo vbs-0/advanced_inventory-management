@@ -199,19 +199,22 @@
 
                 <!-- Center Navigation -->
                 <div class="hidden md:flex items-center space-x-4">
+                    {% if current_user.role == ['ADMIN','SUPERVISOR','MANAGER'] %}
                     <a href="{{ url_for('reports') }}" class="nav-link">
                         <i class="fas fa-chart-line icon-animate"></i>
                         <span>Dashboard</span>
                     </a>
-
+                    {% endif %}
                     <a href="{{ url_for('products') }}" class="nav-link">
                         <i class="fas fa-box icon-animate"></i>
                         <span>Products</span>
                     </a>
+                    {% if current_user.role == ['ADMIN','SUPERVISOR','MANAGER'] %}
                     <a href="{{ url_for('orders') }}" class="nav-link">
                         <i class="fas fa-shopping-cart icon-animate"></i>
                         <span>Orders</span>
                     </a>
+                    {% endif %}
                     {% if current_user.role == 'ADMIN' %}
                     <a href="{{ url_for('bulk_upload_page') }}" class="nav-link">
                         <i class="fas fa-upload icon-animate"></i>
@@ -247,18 +250,22 @@
         <!-- Mobile Only - Top Links -->
         <div class="md:hidden menu-section">
             <div class="menu-section-title">Quick Access</div>
+            {% if current_user.role == ['ADMIN','SUPERVISOR','MANAGER'] %}
             <a href="{{ url_for('reports') }}" class="menu-item">
                 <i class="fas fa-chart-line"></i>
                 <span>Dashboard</span>
             </a>
+            {% endif %}
             <a href="{{ url_for('products') }}" class="menu-item">
                 <i class="fas fa-box"></i>
                 <span>Products</span>
             </a>
+            {% if current_user.role == ['ADMIN','SUPERVISOR','MANAGER'] %}
             <a href="{{ url_for('orders') }}" class="menu-item">
                 <i class="fas fa-shopping-cart"></i>
                 <span>Orders</span>
             </a>
+            {% endif %}
             {% if current_user.role == 'ADMIN' %}
             <a href="{{ url_for('bulk_upload_page') }}" class="menu-item">
                 <i class="fas fa-upload"></i>
